@@ -126,9 +126,9 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 0 90px}
       <h2>اطلب الآن</h2>
       <p class="sub">املأ المعلومات وسنتواصل معك عبر واتساب لتأكيد الطلب.</p>
       <div class="notice" style="margin:0 0 6px">التوصيل لمدينة الداخلة فقط · الدفع عند الاستلام</div>
-      <label for="name">الاسم الكامل</label>
+      <label for="name">الاسم الكامل (اختياري)</label>
       <input id="name" autocomplete="name" placeholder="مثال: محمد أحمد">
-      <label for="phone">رقم الهاتف</label>
+      <label for="phone">رقم الهاتف (اختياري)</label>
       <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="06XXXXXXXX" dir="ltr" style="text-align:right">
       <label for="addr">العنوان في الداخلة (الحي / الشارع)</label>
       <input id="addr" autocomplete="street-address" placeholder="مثال: حي الوحدة، رقم 12">
@@ -157,13 +157,11 @@ footer{text-align:center;color:var(--muted);font-size:14px;padding:26px 0 90px}
     var n=document.getElementById('name').value.trim(),
         p=document.getElementById('phone').value.replace(/[\s.\-]/g,''),
         a=document.getElementById('addr').value.trim();
-    if(n.length<3){err.textContent='اكتب اسمك الكامل.';return;}
-    if(!/^(\+?212|0)[5-7]\d{8}$/.test(p)){err.textContent='اكتب رقم هاتف مغربي صحيح، مثال: 0612345678.';return;}
     if(a.length<4){err.textContent='اكتب عنوانك في الداخلة.';return;}
     err.textContent='';
     var q=parseInt(qty.value,10);
     var msg='طلب جديد – حامل الهاتف للسيارة\n'+
-      'الاسم: '+n+'\nالهاتف: '+p+'\nالعنوان (الداخلة): '+a+'\nالكمية: '+q+'\nالمجموع: '+(70*q)+' درهم (الدفع عند الاستلام)';
+      (n?'الاسم: '+n+'\n':'')+(p?'الهاتف: '+p+'\n':'')+'العنوان (الداخلة): '+a+'\nالكمية: '+q+'\nالمجموع: '+(70*q)+' درهم (الدفع عند الاستلام)';
     window.open('https://wa.me/212777497771?text='+encodeURIComponent(msg),'_blank');
   });
 })();
